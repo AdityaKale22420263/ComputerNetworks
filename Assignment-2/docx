@@ -1,1 +1,68 @@
+📘 Configuring a Simple Router-to-PC Network in Packet Tracer
+🔹 Objective
 
+Connect two PCs through a router, assign IP addresses, and enable communication (ping) between them.
+
+🔹 Topology
+
+Router ISR4331 with two interfaces:
+
+Gig0/0/0 → PC1
+
+Gig0/0/1 → PC0
+
+PC0 connected directly to router
+
+PC1 connected directly to router
+
+🔹 IP Addressing Plan
+Device	Interface	IP Address	Subnet Mask	Default Gateway
+Router	Gig0/0/0	192.168.1.1	255.255.255.0	–
+Router	Gig0/0/1	192.168.0.1	255.255.255.0	–
+PC0	Fa0	192.168.0.2	255.255.255.0	192.168.0.1
+PC1	Fa0	192.168.1.2	255.255.255.0	192.168.1.1
+🔹 Router Configuration
+
+On the router CLI:
+
+Router> enable
+Router# configure terminal
+
+! Interface to PC1
+Router(config)# interface gig0/0/0
+Router(config-if)# ip address 192.168.1.1 255.255.255.0
+Router(config-if)# no shutdown
+Router(config-if)# exit
+
+! Interface to PC0
+Router(config)# interface gig0/0/1
+Router(config-if)# ip address 192.168.0.1 255.255.255.0
+Router(config-if)# no shutdown
+Router(config-if)# exit
+
+Router(config)# end
+Router# write memory
+
+🔹 PC Configuration
+
+Go to Desktop → IP Configuration:
+
+PC0: IP 192.168.0.2, Mask 255.255.255.0, Gateway 192.168.0.1
+
+PC1: IP 192.168.1.2, Mask 255.255.255.0, Gateway 192.168.1.1
+
+🔹 Verification
+
+On Router:
+
+show ip interface brief
+
+
+(Interfaces should show “up” with correct IPs).
+
+On PCs:
+Open Command Prompt →
+
+ping 192.168.0.1   (PC0 → Router)
+ping 192.168.1.1   (PC1 → Router)
+ping 192.168.1.2   (PC0 → PC1 through router)
