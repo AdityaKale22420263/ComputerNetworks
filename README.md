@@ -12,7 +12,6 @@ A comprehensive collection of network administration, protocol configuration, an
 - [Getting Started](#getting-started)
 - [Assignment Details](#assignment-details)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## 🌐 Overview
 
